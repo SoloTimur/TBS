@@ -7,44 +7,51 @@ public class EnemyAI : MonoBehaviour
 {   
     public List<Transform>  patrolPoints;
     public PlayerController player;
-    private NavMeshAgent _navMeshAgent;
     public float viewAngle;
-    private bool _isPlayerNoticed;
+    public float damage = 30;
 
-    private void Start()
+    private NavMeshAgent _navMeshAgent;
+    private bool _isPlayerNoticed;
+    private PlayerHealth _playerHealth;
+    // Start is called before the first frame update
+    void Start()
     {
         InitComponentLinks();
         PickNewPatrolPoint();
     }
 
-    private void Update()
+    void Update()
     {
         NoticePlayerUpdate();
         ChaseUpdate();
+        AttackUpdate();
         PatrolUpdate();
     }
-    
+    private void AttackUpdate()
+    {
+        if(_isPlayerNoticed)
+        {
+            if(_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            {
+                _playerHealth.DealDamage(damage * Time.deltaTime);
+            }
+        }
+    }
     private void InitComponentLinks()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _playerHealth = player.GetComponent<PlayerHealth>();
     }
-    
     private void PatrolUpdate()
     {
         if(!_isPlayerNoticed)
         {
-          if(_navMeshAgent.remainingDistance == 0)
-           {
-              PickNewPatrolPoint();
-           }
+            if(_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
+            {
+                PickNewPatrolPoint();
+            }
         }
     }
-   
-    private void PickNewPatrolPoint()
-    {
-        _navMeshAgent.destination = patrolPoints[Random.Range(0, patrolPoints.Count)].position;
-    }    
-   
     private void ChaseUpdate()
     {
         if(_isPlayerNoticed)
@@ -52,8 +59,11 @@ public class EnemyAI : MonoBehaviour
             _navMeshAgent.destination = player.transform.position;
         }
     }
-   
-     private void NoticePlayerUpdate()
+    private void PickNewPatrolPoint()
+    {
+        _navMeshAgent.destination = patrolPoints[Random.Range(0, patrolPoints.Count)].position;
+    }
+    private void NoticePlayerUpdate()
     {
         var direction = player.transform.position - transform.position;
         _isPlayerNoticed = false;
@@ -71,4 +81,3 @@ public class EnemyAI : MonoBehaviour
         }
     }
 }
-     
