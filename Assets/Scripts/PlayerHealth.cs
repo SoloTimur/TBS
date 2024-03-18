@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float value = 100;
     public RectTransform valueRectTransform;
-
+    public Animator animator;
     public GameObject gameplayUI;
     public GameObject gameOverScreen;
 
@@ -18,6 +18,18 @@ public class PlayerHealth : MonoBehaviour
         DrawHealthBar();
     }
 
+    public bool IsAlive()
+    {
+        return value > 0;
+    }
+    
+    public void AddHealth(float amount)
+    {
+        value += amount;
+        value = Mathf.Clamp(value, 0, _maxValue);
+        DrawHealthBar();
+    }
+    
     public void DealDamage(float damage)
     {
     value -= damage;
@@ -32,9 +44,12 @@ public class PlayerHealth : MonoBehaviour
     {
         gameplayUI.SetActive(false);
         gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<Animator>().SetTrigger("show");
+
         GetComponent<PlayerController>().enabled = false;
         GetComponent<FireballCaster>().enabled = false;
         GetComponent<CameraRotation>().enabled = false;
+        animator.SetTrigger("death");
     }
     private void DrawHealthBar()
     {
