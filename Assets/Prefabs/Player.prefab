@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebce1ee487296f64bac6ba413f30ff17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
   fireballPrefab: {fileID: 3313652367673253333, guid: a2ab37e5a447cb9488e3258bb0a9a540,
     type: 3}
   fireballSourceTransform: {fileID: 7678114358636200973}
@@ -301,6 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957b5dc36a436b74c83ea0508daa56ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 50
   grenadePrefab: {fileID: 1335160481437178384, guid: 5e287f359423fc5478a3ed90107f5603,
     type: 3}
   grenadeSourceTransform: {fileID: 7526636321687133994}
@@ -317,6 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1374a23aaa837448389de16a8e56ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels: []
   experienceValueRectTransform: {fileID: 757937312664013643}
   levelValueTMP: {fileID: 5940672869437253179}
 --- !u!1 &586382942574200606
@@ -1447,7 +1450,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0.9, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

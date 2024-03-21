@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     public void AttackDamage()
     {
       if (!_isPlayerNoticed) return;
-      if (_navMeshAgent.remainingDistance > (_navMeshAgent.stoppingDistance + attackDistance)) return;
+     
 
       _playerHealth.DealDamage(damage);  
     }
